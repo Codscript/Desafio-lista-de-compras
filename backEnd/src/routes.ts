@@ -36,14 +36,7 @@ routes.put('/products/id', async (request, response) => {
 });
 export default routes
 
-/*const products = [
-    'Rafael',
-    'Michelle',
-    '...',
-    'Lorena',
-    'Pietro',
-    'Lucas'
-];
+/*
 
 app.get('/products', (request, response) => {
     console.log('listagem de produtos');
