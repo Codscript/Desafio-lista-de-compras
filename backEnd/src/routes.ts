@@ -9,6 +9,31 @@ routes.get('/products', async (request, response) => {
     return response.json(products);
 });
 
+routes.post('/products', async (request, response) => {
+    const  {
+        name,
+        price
+    } = request.body
+
+    await knex('products').insert({
+        name,
+        price
+    });
+    return response.json({sucess: true});
+});
+
+routes.put('/products/id', async (request, response) => {
+    const  {
+        name,
+        price
+    } = request.body
+
+    await knex('products').update({
+        name,
+        price
+    });
+    return response.json({sucess: true});
+});
 export default routes
 
 /*const products = [
