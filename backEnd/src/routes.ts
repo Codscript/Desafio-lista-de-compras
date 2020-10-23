@@ -1,9 +1,12 @@
 import express from 'express';
+import knex from './database/connection';
 
 const routes = express.Router();
 
-routes.get('/', (request, response) => {
-    return response.json({ message: 'Hello World'});
+routes.get('/products', async (request, response) => {
+    const products =  await knex('products').select('*');
+
+    return response.json(products);
 });
 
 export default routes
