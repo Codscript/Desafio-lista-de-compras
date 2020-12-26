@@ -9,6 +9,13 @@ routes.get('/products', async (request, response) => {
     return response.json(products);
 });
 
+routes.get('/products/:id', async (request, response) => {
+    const id = Number(request.params.id);
+    const product =  await knex.select('name', 'price').where('id',id).from('products');
+    console.log(product);
+    return response.json(product);
+});
+
 routes.post('/products', async (request, response) => {
     const  {
         name,
@@ -22,7 +29,8 @@ routes.post('/products', async (request, response) => {
     return response.json({sucess: true});
 });
 
-routes.put('/products/id', async (request, response) => {
+routes.put('/products/:id', async (request, response) => {
+    const id = Number(request.params.id);
     const  {
         name,
         price
@@ -31,7 +39,13 @@ routes.put('/products/id', async (request, response) => {
     await knex('products').update({
         name,
         price
-    });
+    }).where('id', id)
+    return response.json({sucess: true});
+});
+
+routes.delete('/products/:id', async (request, response) => {
+    const id = Number(request.params.id);
+    await knex('products').delete().where('id', id)
     return response.json({sucess: true});
 });
 export default routes
